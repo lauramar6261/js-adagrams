@@ -1,6 +1,5 @@
 const Adagrams = {
-  drawLetters() {
-    let letterPool = [
+    letterPool: [
       'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A',
       'B', 'B',
       'C', 'C',
@@ -27,18 +26,19 @@ const Adagrams = {
       'X',
       'Y', 'Y',
       'Z'
-    ];
+    ],
+  drawLetters() {
     const tenLetters = [];
 
     let indices_used = [];
-    const max = letterPool.length - 1;
+    const max = this.letterPool.length - 1;
     for (let i=0; i < 10; i++) {
       let index = Math.floor(Math.random() * max);
       if (indices_used.includes(index)){
         index = Math.floor(Math.random() * max);
       } else {
         console.log(index)
-        tenLetters.push(letterPool[index])
+        tenLetters.push(this.letterPool[index])
         indices_used.push(index)
       }
     }
