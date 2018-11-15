@@ -18,7 +18,7 @@ describe('Adagrams', () => {
     });
   });
 
-  xdescribe('usesAvailableLetters', () => {
+  describe('usesAvailableLetters', () => {
     it('returns true if the submitted letters are valid against the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'DOG';
@@ -35,7 +35,7 @@ describe('Adagrams', () => {
       expect(isValid).toBe(false);
     });
 
-    it('returns false when word contains repeated letters more than in the drawn letters', () => {
+    it.only('returns false when word contains repeated letters more than in the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'GOOD';
 

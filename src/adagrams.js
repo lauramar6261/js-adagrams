@@ -63,24 +63,26 @@ const Adagrams = {
     console.log('letterCountsInHand',letterCountsInHand)
 
     // same for input
-    input.split().forEach((letter) => letterCountsInput[letter] = 0);
+    input.split("").forEach((letter) => letterCountsInput[letter] = 0);
     // calculate frequency of lettersInInput
-    input.split().forEach((letter) => letterCountsInput[letter] += 1);
+    input.split("").forEach((letter) => letterCountsInput[letter] += 1);
     let answer
-    input.split("").forEach((letter) => {
+    input.split("").map((letter) => {
       let freqInput = letterCountsInput[letter]
+      console.log('freqInput',freqInput)
       let freqInHand = letterCountsInHand[letter]
-      // console.log('freqInHand', freqInput)
       console.log('freqInHand',freqInHand)
       if (freqInHand == undefined) {
         answer = false;
       } else if (freqInput > freqInHand) {
         answer = false;
       }
-      answer = true;
     });
-    // get value of frequency in
-    return answer
+    if (answer == false) {
+      return answer
+    } else {
+      return true
+    }
   }
 };
 
