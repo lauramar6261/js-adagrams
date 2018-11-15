@@ -32,18 +32,49 @@ const Adagrams = {
 
     let indices_used = [];
     const max = this.letterPool.length - 1;
+
     for (let i=0; i < 10; i++) {
       let index = Math.floor(Math.random() * max);
       if (indices_used.includes(index)){
         index = Math.floor(Math.random() * max);
       } else {
-        console.log(index)
         tenLetters.push(this.letterPool[index])
         indices_used.push(index)
       }
     }
     return tenLetters;
   },
+  usesAvailableLetters(input, lettersInHand) {
+    // console.log(lettersInHand)
+    // console.log(input)
+    let letterCountsInHand = { };
+    let letterCountsInput = { };
+    // create hash of lettersInHand
+    lettersInHand.forEach((letter) => letterCountsInHand[letter] = 0);
+    // calculate frequency of lettersInHand
+    lettersInHand.forEach((letter) => letterCountsInHand[letter] += 1);
+    console.log('letterCountsInHand',letterCountsInHand)
+
+    // same for input
+    input.split().forEach((letter) => letterCountsInput[letter] = 0);
+    // calculate frequency of lettersInInput
+    input.split().forEach((letter) => letterCountsInput[letter] += 1);
+    let answer
+    input.split("").forEach((letter) => {
+      let freqInput = letterCountsInput[letter]
+      let freqInHand = letterCountsInHand[letter]
+      // console.log('freqInHand', freqInput)
+      console.log('freqInHand',freqInHand)
+      if (freqInHand == undefined) {
+        answer = false;
+      } else if (freqInput > freqInHand) {
+        answer = false;
+      }
+      answer = true;
+    });
+    // get value of frequency in
+    return answer
+  }
 };
 
 // Do not remove this line or your tests will break!
