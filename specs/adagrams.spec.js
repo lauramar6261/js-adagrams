@@ -2,7 +2,7 @@ import Adagrams from 'adagrams';
 
 describe('Adagrams', () => {
   describe('drawLetters', () => {
-    it.only('draws ten letters from the letter pool', () => {
+    it('draws ten letters from the letter pool', () => {
       const drawn = Adagrams.drawLetters();
 
       expect(drawn).toHaveLength(10);

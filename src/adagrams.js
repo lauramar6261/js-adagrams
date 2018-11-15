@@ -29,19 +29,26 @@ const Adagrams = {
     ],
   drawLetters() {
     const tenLetters = [];
+    const tenNumbers = [];
 
-    let indices_used = [];
     const max = this.letterPool.length - 1;
 
-    for (let i=0; i < 10; i++) {
-      let index = Math.floor(Math.random() * max);
-      if (indices_used.includes(index)){
-        index = Math.floor(Math.random() * max);
+    // get 10 unique numbers = length 9 for 10 digits
+    while (tenNumbers.length < 10) {
+      let random = Math.floor(Math.random() * max);
+      if (tenNumbers.includes(random)) {
+        random = Math.floor(Math.random() * max);
       } else {
-        tenLetters.push(this.letterPool[index])
-        indices_used.push(index)
+        tenNumbers.push(random)
       }
     }
+
+    console.log('tenNumbers',tenNumbers)
+    // use numbers to get 10 letters
+    tenNumbers.forEach((num) => {
+      let letter = this.letterPool[num]
+      tenLetters.push(letter)
+    });
     return tenLetters;
   },
   usesAvailableLetters(input, lettersInHand) {
