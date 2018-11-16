@@ -127,7 +127,7 @@ describe('Adagrams', () => {
         expect(Adagrams.highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      it.only('selects the first word when both have same length', () => {
+      it('selects the first word when both have same length', () => {
         const words = ['AAAAAAAAAA', 'EEEEEEEEEE'];
         const first = { word: 'AAAAAAAAAA', score: Adagrams.scoreWord('AAAAAAAAAA') };
         const second = { word: 'EEEEEEEEEE', score: Adagrams.scoreWord('EEEEEEEEEE') };

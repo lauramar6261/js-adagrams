@@ -51,26 +51,21 @@ const Adagrams = {
     return tenLetters;
   },
   usesAvailableLetters(input, lettersInHand) {
-    // console.log(lettersInHand)
-    // console.log(input)
     let letterCountsInHand = { };
     let letterCountsInput = { };
-    // create hash of lettersInHand
-    lettersInHand.forEach((letter) => letterCountsInHand[letter] = 0);
-    // calculate frequency of lettersInHand
-    lettersInHand.forEach((letter) => letterCountsInHand[letter] += 1);
-    // console.log('letterCountsInHand',letterCountsInHand)
 
-    // same for input
+    // calculate freq of letters in lettersInHand
+    lettersInHand.forEach((letter) => letterCountsInHand[letter] = 0);
+    lettersInHand.forEach((letter) => letterCountsInHand[letter] += 1);
+
+    // calculate freq of letters in input
     input.split("").forEach((letter) => letterCountsInput[letter] = 0);
-    // calculate frequency of lettersInInput
     input.split("").forEach((letter) => letterCountsInput[letter] += 1);
+
     let answer
     input.split("").map((letter) => {
       let freqInput = letterCountsInput[letter]
-      // console.log('freqInput',freqInput)
       let freqInHand = letterCountsInHand[letter]
-      // console.log('freqInHand',freqInHand)
       if (freqInHand == undefined) {
         answer = false;
       } else if (freqInput > freqInHand) {
@@ -135,9 +130,9 @@ const Adagrams = {
       let winnerWord = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
       winner = {"word": winnerWord, "score": data[winnerWord]}
     } else { // tied
-      if ((word10 != undefined) && (shortestWord.length != 10 )){ // use word that is 10 chars
+      if ((word10 != undefined) && (shortestWord.length != 10 )){ // use word that is 10 chars and the first one
         winner = {"word": word10, "score": data[word10]}
-      } else { //use shortestWord and first occurance
+      } else { //use shortestWord
         winner = {"word": shortestWord, "score": data[shortestWord]}
       }
     }
