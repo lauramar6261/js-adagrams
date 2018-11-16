@@ -121,12 +121,13 @@ const Adagrams = {
     words.forEach((word) => {
       let score = this.scoreWord(word)
       data[word] = score
-      if (word.length < shortestWord.length) {
+      if (word.length < shortestWord.length){
         shortestWord = word
       } else if (word.length == 10 ) {
         word10 = word
       }
     });
+
 
     let bestScore = Object.values(data).reduce((h, s) => h < s ? s : h, 0);
     let numTies = Object.values(data).filter((s) => s ==bestScore).length
@@ -134,42 +135,12 @@ const Adagrams = {
       let winnerWord = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
       winner = {"word": winnerWord, "score": data[winnerWord]}
     } else { // tied
-      if (word10 != undefined){ // use word that is 10 chars
+      if ((word10 != undefined) && (shortestWord.length != 10 )){ // use word that is 10 chars
         winner = {"word": word10, "score": data[word10]}
-      } else { //use shortestWord
+      } else { //use shortestWord and first occurance
         winner = {"word": shortestWord, "score": data[shortestWord]}
       }
     }
-    // in case of a tied
-    // h is the first element, s are the remaining one, if h < s return s otherwise return h, return 0 if none are found
-
-
-
-    // let firstWordIndex = Object.values(data).indexOf(bestScore)
-    // let lastWordIndex = Object.values(data).lastIndexOf(bestScore)
-    // console.log('lastWord', lastWord)
-    // console.log('firstWord', firstWord)
-
-    // let words = Object.keys(data)
-
-  //   console.log(data)
-  //   let ties_words = []
-  //
-  //   console.log(ties_words)
-  //   if (ties_words.length == 1) {
-  //     winner = {"score": data[ties_words[0]], "word": ties_words[0]}
-  //   } else { // tie
-  //     ties_words.forEach((word) => {
-  //       if (word.length == 10) {// select word length 10 and return it as a winner
-  //         winner[word] = data[word]
-  //       }
-  //     });
-  //     ties_words.sort(function(a, b) {
-  //       return a.length - b.length
-  //     });
-  //     winner[ties_words[0]] = data[ties_words[0]]
-  //   }
-  // console.log(winner)
   return winner
   }
 
