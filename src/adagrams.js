@@ -120,29 +120,30 @@ const Adagrams = {
       let score = this.scoreWord(word)
       data[word] = score
     });
-    let arr = Object.values(data);
-    const maximum = Math.max(arr);
-
-    let ties_words = []
-    for(let key in data) {
-      if(data[key] === maximum) {
-        ties_words.push(data[key])
-      }
-    }
-
-    if (ties_words.length == 1) {
-      return ties_words[0]
-    } else { // tie
-      ties_words.forEach((word) => {
-        if (word.length == 10) {// select word length 10 and return it as a winner
-          winner[word] = data[word]
-        }
-      });
-      ties_words.sort(function(a, b) {
-        return a.length - b.length
-      });
-      winner[ties_words[0]] = data[ties_words[0]]
-    }
+    let winnerWord = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
+    // if (winnerWord.length === 10) {
+      winner = {"word": winnerWord, "score": data[winnerWord]}
+    // }
+  //
+  //   console.log(data)
+  //   let ties_words = []
+  //
+  //   console.log(ties_words)
+  //   if (ties_words.length == 1) {
+  //     winner = {"score": data[ties_words[0]], "word": ties_words[0]}
+  //   } else { // tie
+  //     ties_words.forEach((word) => {
+  //       if (word.length == 10) {// select word length 10 and return it as a winner
+  //         winner[word] = data[word]
+  //       }
+  //     });
+  //     ties_words.sort(function(a, b) {
+  //       return a.length - b.length
+  //     });
+  //     winner[ties_words[0]] = data[ties_words[0]]
+  //   }
+  // console.log(winner)
+  return winner
   }
 
 };
