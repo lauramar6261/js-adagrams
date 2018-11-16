@@ -60,7 +60,7 @@ const Adagrams = {
     lettersInHand.forEach((letter) => letterCountsInHand[letter] = 0);
     // calculate frequency of lettersInHand
     lettersInHand.forEach((letter) => letterCountsInHand[letter] += 1);
-    console.log('letterCountsInHand',letterCountsInHand)
+    // console.log('letterCountsInHand',letterCountsInHand)
 
     // same for input
     input.split("").forEach((letter) => letterCountsInput[letter] = 0);
@@ -69,9 +69,9 @@ const Adagrams = {
     let answer
     input.split("").map((letter) => {
       let freqInput = letterCountsInput[letter]
-      console.log('freqInput',freqInput)
+      // console.log('freqInput',freqInput)
       let freqInHand = letterCountsInHand[letter]
-      console.log('freqInHand',freqInHand)
+      // console.log('freqInHand',freqInHand)
       if (freqInHand == undefined) {
         answer = false;
       } else if (freqInput > freqInHand) {
@@ -83,6 +83,37 @@ const Adagrams = {
     } else {
       return true
     }
+  },
+  scoreWord(word) {
+    let score
+    if (word.length == 10 || word.length == 7 || word.length == 8 || word.length == 9) {
+      score += 10
+    }
+    console.log(score)
+    const group1 = 'AEIOULNRST'
+    const group2 = 'D G'
+    const group3 = 'B C M P'
+    const group4 = 'F H V W Y'
+    const group5 = 'J X'
+    const group6 = 'Q Z'
+
+    word.toUpperCase().split('').map((letter) => {
+      console.log(letter)
+      if (group1.includes(letter)) {
+        score += 1;
+      } else if (group2.includes(letter)) {
+        score += 2;
+      } else if (group3.includes(letter)) {
+        score += 3;
+      } else if (group4.includes(letter)) {
+        score += 4;
+      } else if (group5.includes(letter)) {
+        score += 8;
+      } else if (group6.includes(letter)) {
+        score += 10;
+      }
+    });
+  return score
   }
 };
 
