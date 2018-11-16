@@ -116,15 +116,42 @@ const Adagrams = {
   highestScoreFrom(words) {
     let data = {}
     let winner = {}
+    let shortestWord = words[0]
+    let word10
     words.forEach((word) => {
       let score = this.scoreWord(word)
       data[word] = score
+      if (word.length < shortestWord.length) {
+        shortestWord = word
+      } else if (word.length == 10 ) {
+        word10 = word
+      }
     });
-    let winnerWord = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
-    // if (winnerWord.length === 10) {
+
+    let bestScore = Object.values(data).reduce((h, s) => h < s ? s : h, 0);
+    let numTies = Object.values(data).filter((s) => s ==bestScore).length
+    if (numTies == 1) {
+      let winnerWord = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
       winner = {"word": winnerWord, "score": data[winnerWord]}
-    // }
-  //
+    } else { // tied
+      if (word10 != undefined){ // use word that is 10 chars
+        winner = {"word": word10, "score": data[word10]}
+      } else { //use shortestWord
+        winner = {"word": shortestWord, "score": data[shortestWord]}
+      }
+    }
+    // in case of a tied
+    // h is the first element, s are the remaining one, if h < s return s otherwise return h, return 0 if none are found
+
+
+
+    // let firstWordIndex = Object.values(data).indexOf(bestScore)
+    // let lastWordIndex = Object.values(data).lastIndexOf(bestScore)
+    // console.log('lastWord', lastWord)
+    // console.log('firstWord', firstWord)
+
+    // let words = Object.keys(data)
+
   //   console.log(data)
   //   let ties_words = []
   //

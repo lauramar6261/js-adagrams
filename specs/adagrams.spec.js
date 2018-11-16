@@ -99,7 +99,7 @@ describe('Adagrams', () => {
       expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
     });
 
-    xdescribe('in case of tied score', () => {
+    describe('in case of tied score', () => {
       const expectTie = (words) => {
         const scores = words.map(Adagrams.scoreWord);
         const highScore = scores.reduce((h, s) => h < s ? s : h, 0);
@@ -127,7 +127,7 @@ describe('Adagrams', () => {
         expect(Adagrams.highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      it('selects the first word when both have same length', () => {
+      it.only('selects the first word when both have same length', () => {
         const words = ['AAAAAAAAAA', 'EEEEEEEEEE'];
         const first = { word: 'AAAAAAAAAA', score: Adagrams.scoreWord('AAAAAAAAAA') };
         const second = { word: 'EEEEEEEEEE', score: Adagrams.scoreWord('EEEEEEEEEE') };
