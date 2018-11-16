@@ -35,7 +35,7 @@ describe('Adagrams', () => {
       expect(isValid).toBe(false);
     });
 
-    it.only('returns false when word contains repeated letters more than in the drawn letters', () => {
+    it('returns false when word contains repeated letters more than in the drawn letters', () => {
       const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
       const word = 'GOOD';
 
@@ -99,7 +99,7 @@ describe('Adagrams', () => {
       expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
     });
 
-    describe('in case of tied score', () => {
+    xdescribe('in case of tied score', () => {
       const expectTie = (words) => {
         const scores = words.map(Adagrams.scoreWord);
         const highScore = scores.reduce((h, s) => h < s ? s : h, 0);

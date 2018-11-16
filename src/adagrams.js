@@ -43,7 +43,6 @@ const Adagrams = {
       }
     }
 
-    console.log('tenNumbers',tenNumbers)
     // use numbers to get 10 letters
     tenNumbers.forEach((num) => {
       let letter = this.letterPool[num]
@@ -85,11 +84,10 @@ const Adagrams = {
     }
   },
   scoreWord(word) {
-    let score
+    let score = 0
     if (word.length == 10 || word.length == 7 || word.length == 8 || word.length == 9) {
-      score += 10
+      score += 8
     }
-    console.log(score)
     const group1 = 'AEIOULNRST'
     const group2 = 'D G'
     const group3 = 'B C M P'
@@ -98,7 +96,6 @@ const Adagrams = {
     const group6 = 'Q Z'
 
     word.toUpperCase().split('').map((letter) => {
-      console.log(letter)
       if (group1.includes(letter)) {
         score += 1;
       } else if (group2.includes(letter)) {
@@ -114,7 +111,40 @@ const Adagrams = {
       }
     });
   return score
+  },
+
+  highestScoreFrom(words) {
+    let data = {}
+    let winner = {}
+    words.forEach((word) => {
+      let score = this.scoreWord(word)
+      data[word] = score
+    });
+    let arr = Object.values(data);
+    const maximum = Math.max(arr);
+
+    let ties_words = []
+    for(let key in data) {
+      if(data[key] === maximum) {
+        ties_words.push(data[key])
+      }
+    }
+
+    if (ties_words.length == 1) {
+      return ties_words[0]
+    } else { // tie
+      ties_words.forEach((word) => {
+        if (word.length == 10) {// select word length 10 and return it as a winner
+          winner[word] = data[word]
+        }
+      });
+      ties_words.sort(function(a, b) {
+        return a.length - b.length
+      });
+      winner[ties_words[0]] = data[ties_words[0]]
+    }
   }
+
 };
 
 // Do not remove this line or your tests will break!
